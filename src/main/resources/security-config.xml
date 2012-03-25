@@ -1,0 +1,47 @@
+<beans:beans xmlns="http://www.springframework.org/schema/security"
+    xmlns:beans="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+                        http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-3.0.xsd">
+
+  <beans:bean id="userDetailsService" class="org.springframework.social.security.security.UserDetailsServiceImpl"/>
+
+  <!-- need this to fix a bug in spring security 3.0.6 that causes an NPE when logging out -->
+  <beans:bean id="myLogoutSuccessHandler" class="org.springframework.security.web.authentication.logout.SimpleUrlLogoutSuccessHandler">
+    <beans:property name="defaultTargetUrl" value="/"/>
+    <beans:property name="alwaysUseDefaultTargetUrl" value="true"/>
+  </beans:bean>
+
+  <authentication-manager alias="authenticationManager">
+    <authentication-provider user-service-ref="userDetailsService"/>
+  </authentication-manager>
+
+  <http auto-config="true">
+    <intercept-url pattern="/css/**" filters="none" />
+    <intercept-url pattern="/img/**" filters="none" />
+    <intercept-url pattern="/js/**" filters="none" />
+    <intercept-url pattern="/login*" access="IS_AUTHENTICATED_ANONYMOUSLY"/>
+    <intercept-url pattern="/signup*" access="IS_AUTHENTICATED_ANONYMOUSLY"/>
+      <intercept-url pattern="/signin/**" access="IS_AUTHENTICATED_ANONYMOUSLY"/>
+      <intercept-url pattern="/connect/**" access="IS_AUTHENTICATED_REMEMBERED"/>
+      <intercept-url pattern="/**" access="IS_AUTHENTICATED_REMEMBERED"/>
+
+    <form-login
+        authentication-failure-url="/login?loginError=true"
+        login-page="/login"
+        default-target-url="/"
+    />
+    <!--always-use-default-target="true"-->
+
+    <!-- need success handler to fix a bug in spring security 3.0.6 that causes an NPE when logging out -->
+    <logout logout-url="/logout" invalidate-session="true" success-handler-ref="myLogoutSuccessHandler"/>
+    <!--<logout logout-url="/logout" logout-success-url="/"/>-->
+
+    <remember-me user-service-ref="userDetailsService" key="springsocialsecuritykey"/>
+    
+  <!--
+      <concurrent-session-control max-sessions="1" exception-if-maximum-exceeded="true"/>
+  -->
+
+  </http>
+</beans:beans>

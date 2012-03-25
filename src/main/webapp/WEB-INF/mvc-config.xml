@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+                           http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+                           http://www.springframework.org/schema/context
+                           http://www.springframework.org/schema/context/spring-context-3.0.xsd
+                           http://www.springframework.org/schema/mvc
+                           http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd">
+
+  <bean id="configurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+    <property name="locations" value="classpath:/spring-social-security.properties"/>
+  </bean>
+
+  <mvc:annotation-driven/>
+
+  <context:component-scan base-package="org.springframework.social.security.controllers"/>
+
+  <mvc:resources mapping="/**" location="/" cache-period="#{60 * 60 * 24 * 7}"/>
+
+  <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+    <property name="order" value="2"/>
+    <property name="viewClass" value="org.springframework.web.servlet.view.JstlView"/>
+    <property name="prefix" value="/WEB-INF/jsp/"/>
+    <property name="suffix" value=".jsp"/>
+  </bean>
+
+  <bean id="handlerExceptionResolver" class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
+    <property name="exceptionMappings">
+      <props>
+        <prop key="Exception">error</prop>
+      </props>
+    </property>
+  </bean>
+
+    <mvc:view-controller path="/login" view-name="login"/>
+
+  <bean class="org.springframework.social.connect.web.ConnectController">
+    <!-- relies on by-type autowiring for the constructor-args -->
+    <property name="applicationUrl" value="${site.url}" />
+  </bean>
+
+  <bean class="org.springframework.social.connect.web.ProviderSignInController">
+    <!-- relies on by-type autowiring for the constructor-args -->
+    <property name="applicationUrl" value="${site.url}" />
+    <property name="signUpUrl" value="/signup" />
+    <property name="signInUrl" value="/login" />
+  </bean>
+
+  <bean class="org.springframework.social.security.social.ConnectionSignUpImpl"/>
+  <bean class="org.springframework.social.security.social.web.SignInAdapterImpl"/>
+
+</beans>
