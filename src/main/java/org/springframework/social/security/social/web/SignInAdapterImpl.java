@@ -14,19 +14,21 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 public class SignInAdapterImpl implements SignInAdapter {
-    @Autowired private UserService userService;
-    @Autowired private TokenBasedRememberMeServices tokenBasedRememberMeServices;
+    @Autowired
+    private UserService userService;
+    @Autowired
+    private TokenBasedRememberMeServices tokenBasedRememberMeServices;
 
     public String signIn(String userId, Connection<?> connection, NativeWebRequest request) {
         User user = userService.findByLogin(userId);
         Authentication authentication = SecurityUtil.signInUser(user);
-        
+
         // set remember-me cookie
         tokenBasedRememberMeServices.onLoginSuccess(
                 (HttpServletRequest) request.getNativeRequest(),
                 (HttpServletResponse) request.getNativeResponse(),
                 authentication);
-        
+
         return null;
     }
 }

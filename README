@@ -1,0 +1,16 @@
+This is a simple Web application that demonstrates integration of Spring Social and Spring Security.
+
+This is targeted at developers who already have an existing application using Spring Security, who
+want to add in Spring Social. Spring Social allows new users to sign in using their social network
+accounts. This app shows how to integrate that process into your existing sign up/in processes.
+Spring Social also allows existing users to connect their local accounts to their social network
+accounts. This app shows how to provide that functionality to existing users.
+
+
+What is included in this app:
+
+User - local user account
+UserDAO - for saving users and looking users up by username
+SocialUser - a user's account in a social network (e.g. Facebook, Twitter)
+SocialUserDAO - data access methods useful for implementing Spring Social's
+    ConnectionRepository and UsersConnectionRepository interfaces

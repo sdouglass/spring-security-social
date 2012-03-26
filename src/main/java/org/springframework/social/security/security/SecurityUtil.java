@@ -11,9 +11,12 @@ import org.springframework.social.security.model.User;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Utility methods for working with Spring Security.
+ */
 public class SecurityUtil {
 
-    public static User getUser() {
+    public static User getLoggedInUser() {
         User user = null;
         SecurityContext securityContext = SecurityContextHolder.getContext();
         Authentication auth;
@@ -37,7 +40,7 @@ public class SecurityUtil {
         SecurityContextHolder.getContext().setAuthentication(authentication);
         return authentication;
     }
-    
+
     public static List<GrantedAuthority> getRoles(User user) {
         List<GrantedAuthority> roles = new ArrayList<GrantedAuthority>();
         roles.add(new GrantedAuthorityImpl("ROLE_USER"));

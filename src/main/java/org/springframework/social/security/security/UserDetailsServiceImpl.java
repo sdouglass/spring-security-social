@@ -12,7 +12,8 @@ import org.springframework.social.security.service.UserService;
 import java.util.List;
 
 public class UserDetailsServiceImpl implements UserDetailsService {
-    @Autowired private UserService userService;
+    @Autowired
+    private UserService userService;
 
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException, DataAccessException {
         User domainUser = userService.findByLogin(username);

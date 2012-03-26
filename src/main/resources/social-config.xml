@@ -5,31 +5,31 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
                            http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.0.xsd">
 
-  <bean id="connectionFactoryLocator" class="org.springframework.social.connect.support.ConnectionFactoryRegistry">
-    <property name="connectionFactories">
-      <list>
-        <ref bean="twitterConnectionFactory"/>
-        <ref bean="facebookConnectionFactory"/>
-      </list>
-    </property>
-  </bean>
+    <bean id="connectionFactoryLocator" class="org.springframework.social.connect.support.ConnectionFactoryRegistry">
+        <property name="connectionFactories">
+            <list>
+                <ref bean="twitterConnectionFactory"/>
+                <ref bean="facebookConnectionFactory"/>
+            </list>
+        </property>
+    </bean>
 
-  <bean id="twitterConnectionFactory" class="org.springframework.social.twitter.connect.TwitterConnectionFactory">
-    <constructor-arg name="consumerKey" value="${twitter.app.consumerKey}"/>
-    <constructor-arg name="consumerSecret" value="${twitter.app.consumerSecret}"/>
-  </bean>
+    <bean id="twitterConnectionFactory" class="org.springframework.social.twitter.connect.TwitterConnectionFactory">
+        <constructor-arg name="consumerKey" value="${twitter.app.consumerKey}"/>
+        <constructor-arg name="consumerSecret" value="${twitter.app.consumerSecret}"/>
+    </bean>
 
-  <bean id="facebookConnectionFactory" class="org.springframework.social.facebook.connect.FacebookConnectionFactory">
-    <constructor-arg name="clientId" value="${facebook.app.clientId}"/>
-    <constructor-arg name="clientSecret" value="${facebook.app.clientSecret}"/>
-  </bean>
+    <bean id="facebookConnectionFactory" class="org.springframework.social.facebook.connect.FacebookConnectionFactory">
+        <constructor-arg name="clientId" value="${facebook.app.clientId}"/>
+        <constructor-arg name="clientSecret" value="${facebook.app.clientSecret}"/>
+    </bean>
 
-  <bean id="usersConnectionRepository" class="org.springframework.social.security.service.SocialUserServiceImpl"/>
+    <bean id="usersConnectionRepository" class="org.springframework.social.security.service.SocialUserServiceImpl"/>
 
-  <bean id="connectionRepository" factory-method="createConnectionRepository"
-        factory-bean="usersConnectionRepository" scope="request">
-    <constructor-arg value="#{request.userPrincipal.name}" />
-    <aop:scoped-proxy proxy-target-class="false" />
-  </bean>
+    <bean id="connectionRepository" factory-method="createConnectionRepository"
+          factory-bean="usersConnectionRepository" scope="request">
+        <constructor-arg value="#{request.userPrincipal.name}"/>
+        <aop:scoped-proxy proxy-target-class="false"/>
+    </bean>
 
 </beans>

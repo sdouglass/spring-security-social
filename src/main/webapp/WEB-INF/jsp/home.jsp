@@ -18,17 +18,17 @@
             <c:choose>
                 <c:when test="${twitterConnected}">
                     <form name="twitter" action="<c:url value="/connect/twitter"/>" method="POST">
-                    <input type="hidden" name="_method" value="delete">
-                    <label for="disconnectTwitter" style="color:green">Twitter Account Connected!</label>
-                    <input id="disconnectTwitter" class="submitBtn" type="button" name="disconnectTwitterBtn"
-                           value="Disconnect" onclick="document.forms.twitter.submit()">
+                        <input type="hidden" name="_method" value="delete">
+                        <label for="disconnectTwitter" style="color:green">Twitter Account Connected!</label>
+                        <input id="disconnectTwitter" class="submitBtn" type="button" name="disconnectTwitterBtn"
+                               value="Disconnect" onclick="document.forms.twitter.submit()">
                     </form>
                 </c:when>
                 <c:otherwise>
                     <form name="twitter" action="<c:url value="/connect/twitter"/>" method="POST">
-                    <label for="connectTwitter">Twitter Account not connected</label>
-                    <input id="connectTwitter" class="submitBtn" type="button" name="connectTwitterBtn"
-                           value="Connect With Twitter!" onclick="document.forms.twitter.submit()">
+                        <label for="connectTwitter">Twitter Account not connected</label>
+                        <input id="connectTwitter" class="submitBtn" type="button" name="connectTwitterBtn"
+                               value="Connect With Twitter!" onclick="document.forms.twitter.submit()">
                     </form>
                 </c:otherwise>
             </c:choose>
@@ -37,16 +37,16 @@
             <c:choose>
                 <c:when test="${facebookConnected}">
                     <form name="facebook" action="<c:url value="/connect/facebook"/>" method="POST">
-                    <label for="disconnectFacebook" style="color:green">Facebook Account Connected!</label>
-                    <input id="disconnectFacebook" class="submitBtn" type="button" name="disconnectFacebookBtn"
-                           value="Disconnect" onclick="document.forms.facebook.submit()">
+                        <label for="disconnectFacebook" style="color:green">Facebook Account Connected!</label>
+                        <input id="disconnectFacebook" class="submitBtn" type="button" name="disconnectFacebookBtn"
+                               value="Disconnect" onclick="document.forms.facebook.submit()">
                     </form>
                 </c:when>
                 <c:otherwise>
                     <form name="facebook" action="<c:url value="/connect/facebook"/>" method="POST">
-                    <label for="connectFacebook">Facebook Account not connected</label>
-                    <input id="connectFacebook" class="submitBtn" type="button" name="connectFacebookBtn"
-                           value="Connect With Facebook!" onclick="document.forms.facebook.submit()">
+                        <label for="connectFacebook">Facebook Account not connected</label>
+                        <input id="connectFacebook" class="submitBtn" type="button" name="connectFacebookBtn"
+                               value="Connect With Facebook!" onclick="document.forms.facebook.submit()">
                     </form>
                 </c:otherwise>
             </c:choose>

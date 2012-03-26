@@ -8,43 +8,43 @@
            http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.0.xsd
            http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd">
 
-  <context:component-scan base-package="org.springframework.social.security.dao">
-    <context:include-filter type="annotation" expression="org.springframework.stereotype.Repository"/>
-  </context:component-scan>
+    <context:component-scan base-package="org.springframework.social.security.dao">
+        <context:include-filter type="annotation" expression="org.springframework.stereotype.Repository"/>
+    </context:component-scan>
 
-  <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
-    <property name="driverClassName" value="${jdbc.driverClassName:org.hsqldb.jdbcDriver}"/>
-    <property name="url" value="${jdbc.url:jdbc:hsqldb:mem:ssss}"/>
-    <property name="username" value="${jdbc.username:sa}"/>
-    <property name="password" value="${jdbc.password:}"/>
-  </bean>
+    <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+        <property name="driverClassName" value="${jdbc.driverClassName:org.hsqldb.jdbcDriver}"/>
+        <property name="url" value="${jdbc.url:jdbc:hsqldb:mem:ssss}"/>
+        <property name="username" value="${jdbc.username:sa}"/>
+        <property name="password" value="${jdbc.password:}"/>
+    </bean>
 
-  <bean id="sessionFactory" class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean">
-    <property name="dataSource" ref="dataSource"/>
-    <property name="hibernateProperties">
-      <props>
-        <prop key="hibernate.cglib.use_reflection_optimizer">false</prop>
-        <prop key="hibernate.dialect">${hibernate.dialect:org.hibernate.dialect.HSQLDialect}</prop>
-        <prop key="hibernate.show_sql">${hibernate.show_sql:true}</prop>
-        <prop key="hibernate.format_sql">${hibernate.format_sql:true}</prop>
-        <prop key="hibernate.hbm2ddl.auto">${hibernate.hbm2ddl.auto:create-drop}</prop>
-        <prop key="hibernate.cache.use_second_level_cache">true</prop>
-        <prop key="hibernate.cache.provider_class">org.hibernate.cache.EhCacheProvider</prop>
-      </props>
-    </property>
-    <property name="packagesToScan">
-      <list>
-        <value>org.springframework.social.security.model</value>
-      </list>
-    </property>
-  </bean>
+    <bean id="sessionFactory" class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean">
+        <property name="dataSource" ref="dataSource"/>
+        <property name="hibernateProperties">
+            <props>
+                <prop key="hibernate.cglib.use_reflection_optimizer">false</prop>
+                <prop key="hibernate.dialect">${hibernate.dialect:org.hibernate.dialect.HSQLDialect}</prop>
+                <prop key="hibernate.show_sql">${hibernate.show_sql:true}</prop>
+                <prop key="hibernate.format_sql">${hibernate.format_sql:true}</prop>
+                <prop key="hibernate.hbm2ddl.auto">${hibernate.hbm2ddl.auto:create-drop}</prop>
+                <prop key="hibernate.cache.use_second_level_cache">true</prop>
+                <prop key="hibernate.cache.provider_class">org.hibernate.cache.EhCacheProvider</prop>
+            </props>
+        </property>
+        <property name="packagesToScan">
+            <list>
+                <value>org.springframework.social.security.model</value>
+            </list>
+        </property>
+    </bean>
 
-  <bean id="transactionManager" class="org.springframework.orm.hibernate3.HibernateTransactionManager">
-    <property name="sessionFactory" ref="sessionFactory"/>
-  </bean>
+    <bean id="transactionManager" class="org.springframework.orm.hibernate3.HibernateTransactionManager">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
 
-  <tx:annotation-driven/>
+    <tx:annotation-driven/>
 
-  <!-- enables exception translation on @Repository classes -->
-  <bean class="org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor" />
+    <!-- enables exception translation on @Repository classes -->
+    <bean class="org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor"/>
 </beans>

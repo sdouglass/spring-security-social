@@ -17,7 +17,7 @@
         <ol>
             <li>
                 <label for="username">Username:</label>
-                <form:input path="username" id="username" />
+                <form:input path="username" id="username"/>
             </li>
             <li>
                 <label for="password">Password:</label>

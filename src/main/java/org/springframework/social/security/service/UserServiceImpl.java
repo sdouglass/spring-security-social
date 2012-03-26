@@ -10,40 +10,36 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional(readOnly = true)
 public class UserServiceImpl implements UserService {
 
-  private UserDAO userDAO;
+    @Autowired
+    private UserDAO userDAO;
 
-  public User findByLogin(String login) {
-    return userDAO.findByUsername(login);
-  }
-
-  @Transactional(readOnly = false)
-  public void registerUser(User user) {
-
-    if (user.getPassword() == null) {
-        String password = generatePassword();
-        user.setPassword(password);
+    public User findByLogin(String login) {
+        return userDAO.findByUsername(login);
     }
 
-    userDAO.save(user);
-  }
+    @Transactional(readOnly = false)
+    public void registerUser(User user) {
+
+        if (user.getPassword() == null) {
+            String password = generatePassword();
+            user.setPassword(password);
+        }
+
+        userDAO.save(user);
+    }
 
     private static final String RANDOM_PASSWORD_CHARS =
-    "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890-_!$*";
+            "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890-_!$*";
 
-  private static final int RANDOM_PASSWORD_LENGTH = 12;
+    private static final int RANDOM_PASSWORD_LENGTH = 12;
 
-  private String generatePassword() {
-    StringBuilder password = new StringBuilder();
-    for (int i = 0; i < RANDOM_PASSWORD_LENGTH; i++) {
-      int charIndex = (int) (Math.random() * RANDOM_PASSWORD_CHARS.length());
-      char randomChar = RANDOM_PASSWORD_CHARS.charAt(charIndex);
-      password.append(randomChar);
+    private String generatePassword() {
+        StringBuilder password = new StringBuilder();
+        for (int i = 0; i < RANDOM_PASSWORD_LENGTH; i++) {
+            int charIndex = (int) (Math.random() * RANDOM_PASSWORD_CHARS.length());
+            char randomChar = RANDOM_PASSWORD_CHARS.charAt(charIndex);
+            password.append(randomChar);
+        }
+        return password.toString();
     }
-    return password.toString();
-  }
-    
-  @Autowired
-  public void setUserDAO(UserDAO userDAO) {
-    this.userDAO = userDAO;
-  }
 }

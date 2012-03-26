@@ -20,62 +20,39 @@ import java.util.Set;
 @Transactional(readOnly = true)
 public class SocialUserServiceImpl implements SocialUserService {
 
-  private SocialUserDAO socialUserDAO;
-  private UserService userService;
-  private ConnectionFactoryLocator connectionFactoryLocator;
-  private String encryptionPassword;
-  private TextEncryptor textEncryptor;
-  private boolean encryptCredentials;
+    @Autowired
+    private SocialUserDAO socialUserDAO;
+    @Autowired
+    private ConnectionFactoryLocator connectionFactoryLocator;
+    private TextEncryptor textEncryptor;
+    @Value("${social.crypto.password}")
+    private String encryptionPassword;
+    @Value("${social.crypto.enabled:true}")
+    private boolean encryptCredentials;
 
-  @PostConstruct
-  public void initializeTextEncryptor() {
-    textEncryptor = Encryptors.text(encryptionPassword, KeyGenerators.string().generateKey());
-  }
-
-  public List<String> findUserIdsWithConnection(Connection<?> connection) {
-    ConnectionKey key = connection.getKey();
-    return socialUserDAO.findUserIdsByProviderIdAndProviderUserId(key.getProviderId(), key.getProviderUserId());
-  }
-
-  public Set<String> findUserIdsConnectedTo(String providerId, Set<String> providerUserIds) {
-    return new HashSet<String>(socialUserDAO.findUserIdsByProviderIdAndProviderUserIds(providerId, providerUserIds));
-  }
-
-  public ConnectionRepository createConnectionRepository(String userId) {
-    if (userId == null) {
-      throw new IllegalArgumentException("userId cannot be null");
+    @PostConstruct
+    public void initializeTextEncryptor() {
+        textEncryptor = Encryptors.text(encryptionPassword, KeyGenerators.string().generateKey());
     }
-    return new SocialUserConnectionRepositoryImpl(
-        userId,
-        userService,
-        socialUserDAO,
-        connectionFactoryLocator,
-        (encryptCredentials ? textEncryptor : null)
-    );
-  }
 
-  @Autowired
-  public void setSocialUserDAO(SocialUserDAO socialUserDAO) {
-    this.socialUserDAO = socialUserDAO;
-  }
+    public List<String> findUserIdsWithConnection(Connection<?> connection) {
+        ConnectionKey key = connection.getKey();
+        return socialUserDAO.findUserIdsByProviderIdAndProviderUserId(key.getProviderId(), key.getProviderUserId());
+    }
 
-  @Autowired
-  public void setUserService(UserService userService) {
-    this.userService = userService;
-  }
+    public Set<String> findUserIdsConnectedTo(String providerId, Set<String> providerUserIds) {
+        return new HashSet<String>(socialUserDAO.findUserIdsByProviderIdAndProviderUserIds(providerId, providerUserIds));
+    }
 
-  @Autowired
-  public void setConnectionFactoryLocator(ConnectionFactoryLocator connectionFactoryLocator) {
-    this.connectionFactoryLocator = connectionFactoryLocator;
-  }
-
-  @Value("${social.crypto.password}")
-  public void setEncryptionPassword(String encryptionPassword) {
-    this.encryptionPassword = encryptionPassword;
-  }
-
-  @Value("${social.crypto.enabled:true}")
-  public void setEncryptCredentials(boolean encryptCredentials) {
-    this.encryptCredentials = encryptCredentials;
-  }
+    public ConnectionRepository createConnectionRepository(String userId) {
+        if (userId == null) {
+            throw new IllegalArgumentException("userId cannot be null");
+        }
+        return new SocialUserConnectionRepositoryImpl(
+                userId,
+                socialUserDAO,
+                connectionFactoryLocator,
+                (encryptCredentials ? textEncryptor : null)
+        );
+    }
 }

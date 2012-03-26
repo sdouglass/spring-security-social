@@ -8,10 +8,12 @@ import org.springframework.social.security.model.User;
 import org.springframework.social.security.service.UserService;
 
 public class ConnectionSignUpImpl implements ConnectionSignUp {
-    @Autowired private UserService userService;
+    @Autowired
+    private UserService userService;
 
     /**
      * Sign up a new user of the application from the connection.
+     *
      * @param connection the connection
      * @return the new user id
      */
@@ -19,14 +21,13 @@ public class ConnectionSignUpImpl implements ConnectionSignUp {
         UserProfile profile = connection.fetchUserProfile();
         String userId = null;
         if (profile.getEmail() != null) {
+            // copy the username from the connection
+            userId = profile.getUsername();
+
+            // create the user
             User user = new User();
-            user.setUsername(profile.getUsername());
-            try {
-                userService.registerUser(user);
-                userId = user.getUsername();
-            } catch (Exception e) {
-                // hm, what to do here...?
-            }
+            user.setUsername(userId);
+            userService.registerUser(user);
         }
         return userId;
     }
