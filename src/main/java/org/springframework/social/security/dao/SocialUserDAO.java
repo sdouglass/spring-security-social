@@ -28,12 +28,12 @@ import java.util.Set;
  * (e.g. one Twitter account connects with only one local account and vice versa).
  * In this demo application users are not allowed to associate one social account
  * with multiple local accounts. They will get an error if they attempt to do so.
- * Also there is no UI provided for associating multiple social accounts from
- * the same provider with one local account.
+ * Similarly attempting to conenct two social accounts from the same provider 
+ * with one local account will result in an error.
  *
  * There are some common arguments to these methods:
  *
- * userId - unique id of a local account
+ * userId - unique id of a local account (for this app, it's the username)
  * providerId - id of a social provider (e.g. "twitter", "facebook", etc.)
  * providerUserId - id of an account on a social provider's network (e.g. a Twitter handle, Facebook user id, etc.)
  */
