@@ -18,6 +18,10 @@ import java.util.Set;
 
 /**
  * Implements SocialUserDAO using Hibernate and its Criteria API.
+ * 
+ * Based on this class:
+ * 
+ * https://github.com/mschipperheyn/spring-social-jpa/blob/master/spring-social-jpa/src/main/java/org/springframework/social/connect/jpa/JpaConnectionRepository.java
  */
 @Repository
 @SuppressWarnings("unchecked")
