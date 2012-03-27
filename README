@@ -1,6 +1,7 @@
 This is a simple Web application that demonstrates adding Spring Social to an
 existing application that uses Spring Security for authentication and
-authorization and manages its own user accounts (with usernames and passwords).
+authorization, and that manages its own user accounts (with usernames and 
+passwords).
 
 The goal is to add as much Spring Social functionality as possible, including:
 
