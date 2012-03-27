@@ -11,14 +11,6 @@ The goal is to add as much Spring Social functionality as possible, including:
 - users with connected provider accounts signing in using a provider
 - users disconnecting their local accounts from provider accounts
 
-Spring Social allows for many-to-many relationships between local accounts and
-provider accounts. This provides maximum flexibility but probably is not the most
-common use case. In this application users may only connect one account from a
-provider to one local account. Attempts to connect, for example, one Twitter
-account to two local accounts, will fail. Similarly attempts to connect two
-Twitter accounts to one local account will fail. This enforcement is handled in
-the ConnectionRepository.addConnection() implementation in SocialUserConnectionRepositoryImpl.
-
 To use this application you must create Twitter and Facebook apps:
 
 https://dev.twitter.com/apps/new
@@ -49,3 +41,14 @@ Once you've signed in you have the following options:
 - connect or disconnect a Twitter account
 - connect or disconnect a Facebook account
 - log out
+
+NOTE: 
+Spring Social allows for many-to-many relationships between local accounts and
+provider accounts. This provides maximum flexibility but probably is not the most
+common use case. In this application users may only connect one account from a
+provider to one local account. Attempts to connect, for example, one Twitter
+account to two local accounts, will fail. Similarly attempts to connect two
+Twitter accounts to one local account will fail. This enforcement is handled in
+the ConnectionRepository.addConnection() implementation in 
+SocialUserConnectionRepositoryImpl.
+
