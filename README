@@ -1,16 +1,51 @@
 This is a simple Web application that demonstrates integration of Spring Social and Spring Security.
 
-This is targeted at developers who already have an existing application using Spring Security, who
-want to add in Spring Social. Spring Social allows new users to sign in using their social network
-accounts. This app shows how to integrate that process into your existing sign up/in processes.
-Spring Social also allows existing users to connect their local accounts to their social network
-accounts. This app shows how to provide that functionality to existing users.
+This is targeted at adding Spring Social to an existing application that uses Spring Security, that
+already has users, registration, and sign in.
 
+The goal is to add as much Spring Social functionality as possible, including:
 
-What is included in this app:
+- new users signing in using a provider (e.g. Twitter, Facebook, etc.)
+- users connecting their local accounts to provider accounts
+- users viewing their connected provider accounts
+- users with connected provider accounts signing in using a provider
+- users disconnecting their local accounts from provider accounts
 
-User - local user account
-UserDAO - for saving users and looking users up by username
-SocialUser - a user's account in a social network (e.g. Facebook, Twitter)
-SocialUserDAO - data access methods useful for implementing Spring Social's
-    ConnectionRepository and UsersConnectionRepository interfaces
+Spring Social allows for many-to-many relationships between local accounts and provider accounts.
+This provides maximum flexibility but probably is not the most common use case. In this
+application users may only connect one account from a provider to one local account.
+Attempts to connect, for example, one Twitter account to two local accounts, will fail.
+Similarly attempts to connect two Twitter accounts to one local account will fail. This
+enforcement is handled in the ConnectionRepository.addConnection() implementation in
+SocialUserConnectionRepositoryImpl.
+
+To use this application you must create Twitter and Facebook apps:
+
+https://dev.twitter.com/apps/new
+https://developers.facebook.com/apps
+
+In order to start up this application you will need to create a file in src/main/resources
+called "spring-social-security.properties". You must provide values for all of the following
+properties:
+
+- site.url - URL used in the OAuth process
+- social.crypto.password - password for encrypting/decrypting store OAuth secrets
+- twitter.app.consumerKey - the consumer key for your Twitter application
+- twitter.app.consumerSecret - the consumer secret for your Twitter application
+- facebook.app.clientId - the client id for your Facebook application
+- facebook.app.clientSecret - the client secret for your Facebook application
+
+This app uses an in-memory database, so once you've got the properties file configured, you
+should be able to build and run the app (e.g. using "mvn jetty:run"). Navigate to the root of
+the application in your browser and you should be redirected to the login page. From here you
+have a few options:
+
+- sign in using Twitter or Facebook
+- sign in using a username and password
+- sign up (create an account with a username and password)
+
+Once you've signed in you have the following options:
+
+- connect or disconnect a Twitter account
+- connect or disconnect a Facebook account
+- log out

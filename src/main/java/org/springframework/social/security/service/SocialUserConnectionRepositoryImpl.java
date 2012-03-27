@@ -127,6 +127,11 @@ public class SocialUserConnectionRepositoryImpl implements ConnectionRepository 
         if (!userIds.isEmpty()) {
             throw new DuplicateConnectionException(new ConnectionKey(connectionData.getProviderId(), connectionData.getProviderUserId()));
         }
+        //check if this user already has a connected account for this provider
+        List<SocialUser> socialUsers = socialUserDAO.findByUserIdAndProviderId(userId, connectionData.getProviderId());
+        if (!socialUsers.isEmpty()) {
+            throw new DuplicateConnectionException(new ConnectionKey(connectionData.getProviderId(), connectionData.getProviderUserId()));
+        }
 
         Integer maxRank = socialUserDAO.selectMaxRankByUserIdAndProviderId(userId, connectionData.getProviderId());
         int nextRank = (maxRank == null ? 1 : maxRank + 1);

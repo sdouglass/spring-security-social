@@ -7,11 +7,13 @@
 </head>
 <body>
 
+<c:if test="${requestScope['social.addConnection.duplicate'] ne null}">
+    <h3 style="color:red">You have already connected a different Twitter account.</h3>
+</c:if>
+
 <h3>Your Twitter account is connected to your account!</h3>
 
-<br><br>
-
-If you would like to disconnect your Twitter account click this button:<br><br>
+<p>If you would like to disconnect your Twitter account click this button:</p>
 
 <form name="twitter" action="<c:url value="/connect/twitter"/>" method="post">
     <input type="hidden" name="_method" value="delete">
