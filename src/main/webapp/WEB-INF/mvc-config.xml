@@ -18,10 +18,8 @@
 
     <context:component-scan base-package="org.springframework.social.security.controllers"/>
 
-    <mvc:resources mapping="/**" location="/" cache-period="#{60 * 60 * 24 * 7}"/>
-
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-        <property name="order" value="2"/>
+        <property name="order" value="1"/>
         <property name="viewClass" value="org.springframework.web.servlet.view.JstlView"/>
         <property name="prefix" value="/WEB-INF/jsp/"/>
         <property name="suffix" value=".jsp"/>
