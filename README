@@ -17,7 +17,7 @@ https://dev.twitter.com/apps/new
 https://developers.facebook.com/apps
 
 In order to start up this application you will need to create a file in
-src/main/resources called "spring-social-security.properties". You must provide
+src/main/resources called "spring-security-social.properties". You must provide
 values for all of the following properties:
 
 - site.url - URL used in the OAuth process

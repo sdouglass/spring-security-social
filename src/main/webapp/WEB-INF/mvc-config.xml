@@ -10,9 +10,7 @@
                            http://www.springframework.org/schema/mvc
                            http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd">
 
-    <bean id="configurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
-        <property name="locations" value="classpath:/spring-social-security.properties"/>
-    </bean>
+    <import resource="classpath:/properties-config.xml"/>
 
     <mvc:annotation-driven/>
 

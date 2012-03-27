@@ -6,8 +6,7 @@
            ">
 
     <bean id="configurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
-        <property name="locations" value="classpath:/spring-social-security.properties"/>
-        <!--<property name="ignoreResourceNotFound" value="true" />-->
+        <property name="locations" value="classpath:/spring-security-social.properties"/>
     </bean>
 
 </beans>
