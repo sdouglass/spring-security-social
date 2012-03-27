@@ -34,10 +34,10 @@ values for all of the following properties:
 - facebook.app.clientId - the client id for your Facebook application
 - facebook.app.clientSecret - the client secret for your Facebook application
 
-This app uses an in-memory database, so once you've got the properties file configured,
-you should be able to build and run the app (e.g. using "mvn jetty:run"). Navigate to
-the root of the application in your browser and you should be redirected to the login
-page. From here you have a few options:
+This app uses an in-memory database, so once you've got the properties file
+configured, you should be able to build and run the app (e.g. using
+"mvn jetty:run"). Navigate to the root of the application in your browser and
+you should be redirected to the login page. From here you have a few options:
 
 - sign in using Twitter or Facebook
 - sign in using a username and password
