@@ -8,7 +8,7 @@
 <body>
 
 <c:if test="${requestScope['social.addConnection.duplicate'] ne null}">
-    <h3 style="color:red">You have already connected a different Twitter account.</h3>
+    <h3 style="color:red">You have already connected a different Facebook account.</h3>
 </c:if>
 
 <h3>Your Facebook account is connected to your account!</h3>
