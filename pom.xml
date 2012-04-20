@@ -12,11 +12,12 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <spring.version>3.0.5.RELEASE</spring.version>
+        <spring.version>3.1.1.RELEASE</spring.version>
         <hibernate.version>3.6.1.Final</hibernate.version>
-        <spring-social.version>1.0.0.RELEASE</spring-social.version>
-        <spring-social-twitter.version>1.0.0.RELEASE</spring-social-twitter.version>
-        <spring-social-facebook.version>1.0.0.RELEASE</spring-social-facebook.version>
+        <spring-social.version>1.0.2.RELEASE</spring-social.version>
+        <spring-social-twitter.version>1.0.2.RELEASE</spring-social-twitter.version>
+        <spring-social-facebook.version>1.0.1.RELEASE</spring-social-facebook.version>
+		  <spring.security.version>3.1.0.RELEASE</spring.security.version>
         <jackson.version>1.8.5</jackson.version>
     </properties>
 
@@ -112,17 +113,17 @@
         <dependency>
             <groupId>org.springframework.security</groupId>
             <artifactId>spring-security-core</artifactId>
-            <version>${spring.version}</version>
+            <version>${spring.security.version}</version>
         </dependency>
         <dependency>
             <groupId>org.springframework.security</groupId>
             <artifactId>spring-security-config</artifactId>
-            <version>${spring.version}</version>
+            <version>${spring.security.version}</version>
         </dependency>
         <dependency>
             <groupId>org.springframework.security</groupId>
             <artifactId>spring-security-taglibs</artifactId>
-            <version>${spring.version}</version>
+            <version>${spring.security.version}</version>
             <exclusions>
                 <exclusion>
                     <groupId>org.springframework</groupId>
@@ -183,7 +184,7 @@
         <dependency>
             <groupId>org.springframework.security</groupId>
             <artifactId>spring-security-crypto</artifactId>
-            <version>3.1.0.RC3</version>
+            <version>3.1.0.RELEASE</version>
         </dependency>
         <dependency>
             <groupId>hsqldb</groupId>
